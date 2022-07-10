@@ -38,7 +38,7 @@
 #include "Color.h"
 #include "Hacks/Hooks.h"
 
-
+// namespace used here to clean up the main.cpp
 using namespace BNM;
 using namespace Menu;
 using namespace Hooks;
