@@ -1,7 +1,7 @@
 **WARNING: THIS TEMPLATE IS MADE EASY FOR NEWBIES, THIS IS MAINLY FOR EXPERIENCED PROGRAMMERS ONLY. NEWBIES SHOULD NOT PROCEED WITHOUT GETTING ENOUGH INFORMATION ABOUT THIS**
 
 
-**This Is An Imgui Source Convertd For Aide Users(can be used in Android Studio too), And Based On Dear Imgui. Older Base Was Created By Spring Musk and NepMods**
+**This Is An Imgui Source Convertd For Aide Users(can be used in Android Studio too), And Based On Dear Imgui. Main Base Was Created By Spring Musk and NepMods**
 
 
 **This won't cover how to mod games in general, hooking functions, etc that every other online tutorial already covers. This template simply tells you how to use them**
