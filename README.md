@@ -1,14 +1,14 @@
-**WARNING: THIS TEMPLATE IS NOT FOR NEWBIES, THIS IS FOR EXPERIENCES PROGRAMMERS ONLY. NEWBIES SHOULD NOT PROCEED TO TRY IT**
+**WARNING: THIS TEMPLATE IS MADE EASY FOR NEWBIES, THIS IS MAINLY FOR EXPERIENCED PROGRAMMERS ONLY. NEWBIES SHOULD NOT PROCEED WITHOUT GETTING ENOUGH INFORMATION ABOUT THIS**
 
 
-**This Is An Imgui Source Convertd For Aide Users, And Based On Dear Imgui. The Real Base Was Created By Spring Musk**
+**This Is An Imgui Source Convertd For Aide Users(can be used in Android Studio too), And Based On Dear Imgui. Older Base Was Created By Spring Musk and NepMods**
 
 
 **This won't cover how to mod games in general, hooking functions, etc that every other online tutorial already covers. This template simply tells you how to use them**
 
 
 # Introduction
-Imgui mod menu for il2cpp and other native android games, and some codes used from [Octowolve](https://github.com/Octowolve/Hooking-Template-With-Mod-Menu). KittyMemory, MSHook, And64InlineHook and AY Obfuscator included. 
+Imgui mod menu for il2cpp and other native android games, and some codes used from [Octowolve](https://github.com/Octowolve/Hooking-Template-With-Mod-Menu), [SpringMusk](https://github.com/springmusk026/Imgui-Unity). KittyMemory, MSHook, And64InlineHook and AY Obfuscator included. 
 Support Android 4.4.x up to Android S Preview. ARMv7, x86 and ARM64 architecture supported. However x86 is deprecated for Unity games so x86 is not our priority
 
 Preview: 
@@ -29,7 +29,8 @@ Before we can jump head first into working a template, we need to go over a few 
 # What you need
 * Aide Cmods Or Others 
 * NDK Installed In Aide
-* A Small Game
+* A Game
+* A Brain
 
 Then Done
 # Installation
