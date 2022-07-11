@@ -1,7 +1,7 @@
 **WARNING: THIS TEMPLATE IS MADE EASY FOR NEWBIES, THIS IS MAINLY FOR EXPERIENCED PROGRAMMERS ONLY. NEWBIES SHOULD NOT PROCEED WITHOUT GETTING ENOUGH INFORMATION ABOUT THIS**
 
 
-**This Is An Imgui Source Convertd For Aide Users(can be used in Android Studio too), And Based On Dear Imgui. Main Base Was Created By Spring Musk and NepMods**
+**This Is An Imgui Source Convertd For Aide Users(can be used in Android Studio too), And Based On Dear Imgui. Older Base Was Created By Spring Musk and NepMods**
 
 
 **This won't cover how to mod games in general, hooking functions, etc that every other online tutorial already covers. This template simply tells you how to use them**
@@ -54,8 +54,8 @@ MemoryPatch::createWithHex([Lib Name], [offset], "[hex. With or without spaces]"
 [Struct].get_PatchSize();
 [Struct].get_CurrBytes().c_str();
 
-PATCHOFFSET("0x20D3A8", "00 00 A0 E3 1E FF 2F E1");
-PATCHOFFSET_LIB("libFileB.so", "0x20D3A8", "00 00 A0 E3 1E FF 2F E1");
+PATCH_SWITCH("0x20D3A8", "00 00 A0 E3 1E FF 2F E1", SWITCH.BoolExample);
+PATCH_LIB("libFileB.so", "0x20D3A8", "00 00 A0 E3 1E FF 2F E1");
 ```
 
 Example: https://github.com/MJx0/KittyMemory/blob/master/Android/test/src/main.cpp
@@ -76,6 +76,13 @@ HOOKSYM_LIB("libFileB.so", "__SymbolNameExample", FunctionExample, old_FunctionE
 HOOKSYM_NO_ORIG("__SymbolNameExample", FunctionExample);
 HOOKSYM_LIB_NO_ORIG("libFileB.so", "__SymbolNameExample", FunctionExample);
 ```
+Or
+
+Use DobbyHook
+
+```cpp
+DHK("OFFSET", FloatExample, old_FloatExample)
+```
 
 Or
 
@@ -87,6 +94,8 @@ A64HookFunction((void *) getAbsoluteAddress([Lib Name], [offset]), (void *)[func
 ARMv7/x86:
 ```cpp
 MSHookFunction((void *) getAbsoluteAddress([Lib Name], [offset]), (void *)[function], (void **)&[old function]);
+
+MSH("OFFSET", FunctionExample, old_FunctionExample)
 ```
 
 #### **Android.mk**
@@ -142,7 +151,6 @@ There are some simple protections in the template:
 - `string2Offset("")` to protect offsets
 - Simple anti-leech measures that crashes if JNI functions are not called
 - Quite harder to edit credits via smali
-- Toast hidden inside `getFeatureList` in Main.cpp
 
 These protection are NOT full protection, it does not stop them, it will only slow them down, this intent is to help you improve on your own by yourself. You should:
 - Improve anti-leech measures on your own way
@@ -197,8 +205,6 @@ If you have usage problems, try asking your questions on any forum sites. For ex
 Beginner/newbie/noobs and toxic peoples are **NOT** allowed to cоntact. They are annoying, you would be left **unanswered** and possibly get **BLOCKED**. Known leechers will be instant **BLOCKED**
 
 Issue tracker is permanently disabled
-
-Tеlеgram: @layout_musk
 
 
 </details>
