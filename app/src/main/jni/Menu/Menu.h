@@ -1,7 +1,82 @@
 #ifndef MENU
 #define MENU
 #include "ImGui/imgui.h"
+#include "Themes.h"
+#include "../Data/Fonts/Roboto-Regular.h"
+
+
 using namespace ImGui;
+static bool init;
+int  glWidth, glHeight;
+
+void SetupImGui()
+{
+    
+    if (!init)
+    {
+        auto context = ImGui::CreateContext();
+        if (!context)
+        {
+            return;
+        }
+        ImGuiIO &io = ImGui::GetIO();
+        ImFontConfig font_cfg;
+        io.DisplaySize = ImVec2((float)glWidth, (float)glHeight);
+        font_cfg.SizePixels = 22.0f;
+        io.Fonts->AddFontFromMemoryTTF(Roboto_Regular, 22, 22.0f);
+
+        io.IniFilename = NULL;
+        io.KeyMap[ImGuiKey_UpArrow] = 19;
+        io.KeyMap[ImGuiKey_DownArrow] = 20;
+        io.KeyMap[ImGuiKey_LeftArrow] = 21;
+        io.KeyMap[ImGuiKey_RightArrow] = 22;
+        io.KeyMap[ImGuiKey_Enter] = 66;
+        io.KeyMap[ImGuiKey_Backspace] = 67;
+        io.KeyMap[ImGuiKey_PageUp] = 92;
+        io.KeyMap[ImGuiKey_PageDown] = 93;
+        io.KeyMap[ImGuiKey_Escape] = 111;
+        io.KeyMap[ImGuiKey_Delete] = 112;
+        io.KeyMap[ImGuiKey_Home] = 122;
+        io.KeyMap[ImGuiKey_End] = 123;
+        io.KeyMap[ImGuiKey_Insert] = 124;
+        io.KeyMap[ImGuiKey_UpArrow] = 19;
+        io.KeyMap[ImGuiKey_DownArrow] = 20;
+        io.KeyMap[ImGuiKey_LeftArrow] = 21;
+        io.KeyMap[ImGuiKey_RightArrow] = 22;
+        io.KeyMap[ImGuiKey_Enter] = 66;
+        io.KeyMap[ImGuiKey_Backspace] = 67;
+        io.KeyMap[ImGuiKey_PageUp] = 92;
+        io.KeyMap[ImGuiKey_PageDown] = 93;
+        io.KeyMap[ImGuiKey_Escape] = 111;
+        io.KeyMap[ImGuiKey_Delete] = 112;
+        io.KeyMap[ImGuiKey_Home] = 122;
+        io.KeyMap[ImGuiKey_End] = 123;
+        io.KeyMap[ImGuiKey_Insert] = 124;
+        
+        //Set your theme here
+        Theme::SetCorporateGrayTheme();
+        /* All the themes
+        SetBlackGoldTheme();
+        SetYesAnotherDarkTheme();
+        SetDarkGrayTheme();
+        SetCorporateGrayTheme();
+        SetYetAnotherDarkTheme();
+        SetSoftDarkRedTheme();
+        SetClassicSteamHalfLifeTheme();
+        SetAnotherDarkThemeReally();
+        SetDarkGreenBlueTheme();
+        SetDarkRedTheme();
+        */
+        
+        ImGui::GetStyle().ScaleAllSizes(3.0f);
+        
+        ImGui_ImplAndroid_Init(nullptr);
+        ImGui_ImplOpenGL3_Init();
+
+        init = true;
+    }
+}
+
 namespace Menu
 {
   struct {
@@ -10,7 +85,8 @@ namespace Menu
       bool FloatExample = false;
       bool IntExample = false;
       bool VoidExample = false;
-    
+      bool Memorycoins = false;
+      
     } SWITCH; //you can write whatever you want and use SWITCH.BoolExample
 
     
@@ -61,7 +137,7 @@ namespace Menu
                
                  if (ImGui::BeginTabItem("Section 1"))
                   {
-                      Checkbox("Bool on", &SWITCH.BoolExample); //you can write this too
+                      Checkbox("Bool on", &SWITCH.Memorycoins); //you can write this too
                       ImGui::Checkbox("Set 100", &SWITCH.FloatExample);
                       Checkbox("int", &SWITCH.IntExample);
                       ImGui::Checkbox("Void", &SWITCH.VoidExample);
@@ -71,6 +147,7 @@ namespace Menu
                    {
                       ImGui::Text("Lorem ipsum is a dummy text");               // Display some text (you can use a format strings too)
                       ImGui::Checkbox("FrameRate Viewer", &showfrm);
+                      Checkbox("Show window", &show_another_window);
                       ImGui::Checkbox("Demo and Settings Panel", &show_demo_window);      // Edit bools storing our window open/close state
                       ImGui::Text("Does Nothing But Looks Cool");
                       ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
@@ -142,12 +219,68 @@ namespace Menu
         //if (ImGui::MenuItem("MenuItem")) {} // You can also use MenuItem() inside a menu bar!
            if (ImGui::BeginMenu("Tools"))
             {
-               ImGui::MenuItem("Style Editor", NULL, &show_app_style_editor);
-               ImGui::MenuItem("About Dear ImGui", NULL, &show_app_about);
+                Text("Another tab");
+               //ImGui::MenuItem("Style Editor", NULL, &show_app_style_editor);
                ImGui::EndMenu();
             }
             ImGui::EndMenuBar();
          }
+               ImGui::Text("Menu Colour");
+                
+                static int e = 0;
+                ImGui::RadioButton("Black Gold", &e, 1);
+                ImGui::TableNextColumn();
+                ImGui::RadioButton("Dark 1", &e, 2);
+                ImGui::TableNextColumn();
+                ImGui::RadioButton("Dark Gray", &e, 3);
+                ImGui::TableNextColumn();
+                ImGui::RadioButton("Corporate Gray", &e, 4);
+                ImGui::TableNextColumn();
+                ImGui::RadioButton("Dark 2", &e, 5);
+                ImGui::TableNextColumn();
+                ImGui::RadioButton("Dark 3", &e, 6);
+                ImGui::TableNextColumn();
+                ImGui::RadioButton("StyleCalssic", &e, 7);
+                ImGui::TableNextColumn();
+                ImGui::RadioButton("Dark 4", &e, 8);
+                ImGui::TableNextColumn();
+                ImGui::RadioButton("Dark 5", &e, 9);
+                ImGui::TableNextColumn();
+                ImGui::RadioButton("Dark 6", &e, 10);
+                ImGui::TableNextColumn();
+                    switch (e) {
+                        
+                       case 1:
+                          Theme::SetBlackGoldTheme();
+                          break;
+                       case 2:
+                          Theme::SetYesAnotherDarkTheme();
+                          break;
+                       case 3:
+                         Theme::SetDarkGrayTheme();
+                          break;
+                       case 4:
+                         Theme::SetCorporateGrayTheme();
+                          break;
+                       case 5:
+                          Theme::SetYetAnotherDarkTheme();
+                          break;
+                       case 6:
+                          Theme::SetSoftDarkRedTheme();
+                          break;
+                       case 7:
+                          Theme::SetClassicSteamHalfLifeTheme();
+                          break;
+                       case 8:
+                          Theme::SetAnotherDarkThemeReally();
+                          break;
+                       case 9:
+                          Theme::SetDarkGreenBlueTheme();
+                          break;
+                       case 10:
+                         Theme::SetDarkRedTheme();
+                          break;
+                       }
             ImGui::Text("Hello from another window!");
             ImGui::Text("App Average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 

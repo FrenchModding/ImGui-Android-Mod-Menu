@@ -1,10 +1,5 @@
 #include "MainHeader.h" //DON'T FORGET TO SET TARGET LIB NAME IN THE FILE
 
-
-struct Patches {
-    MemoryPatch MemoryExample;
-} hexPatches;
-
 enum Settings {
     fly,
     crouch,
@@ -14,6 +9,10 @@ enum Settings {
 struct {
     Color ZombieColor = Color::red();
 } FT;
+
+struct Patches{
+    MemoryPatch *miniMap, *map;
+}patch;
 
 //declare a variable where the offset we get from bynamemodding sits
 uintptr_t Speed = 0x0;
@@ -69,6 +68,7 @@ void Coin(void *instance) {
     }
     return _Coin(instance);
 }
+ 
 
 //ImGui Menu, Touch and display
 EGLBoolean (*old_eglSwapBuffers)(...);
@@ -82,7 +82,6 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
         DrawImGuiMenu();
     return old_eglSwapBuffers(dpy, surface);
 }
-
 
 
 extern "C"
@@ -101,16 +100,15 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
 
 void *hack_thread(void *) { 
 
-  
     do {
         sleep(1);
     } while (!isLibraryLoaded(targetLibName));
     address = findLibrary(targetLibName);
     LOGI(OBFUSCATE("pthread created"));
     
-    AttachIl2Cpp(); // getting the display and touch via hook
-    Menu::Screen_get_height = (int (*)()) OBFUSCATE_BYNAME_METHOD("UnityEngine", "Screen", "get_height", 0);
-    Menu::Screen_get_width = (int (*)()) OBFUSCATE_BYNAME_METHOD("UnityEngine", "Screen", "get_width", 0);
+    AttachIl2Cpp();
+    Menu::Screen_get_height = (int (*)()) OBFBNM("UnityEngine", "Screen", "get_height", 0);
+    Menu::Screen_get_width = (int (*)()) OBFBNM("UnityEngine", "Screen", "get_width", 0);
     // use bynamemodding to get offsets from here.
     
     //get the class
@@ -120,20 +118,24 @@ void *hack_thread(void *) {
     
     Runner = getOffset(Player, OBFUSCATE("Run"), {"Map"});
     PlayerUpdate = getOffset(Player, OBFUSCATE("Update")); 
-    AddField(Visible, Player, "isVisible"); //Field offset
+    // Field offset
+    AddField(Visible, Player, "isVisible");
     AddField(Speed, Player, "Speed");
     
     //Pointer
     Coins = getOffset(Player, OBFUSCATE("Currency"), {"scale"});
     AddPointer(AddMoney, Coins);
-
+    
+    // And you can call namespace, class, methods all in once by
+    Coins = OBFBNM(""/*NAMESPACE*/, "PlayerData"/*CLASS*/, "Currency"/*METHOD*/, 1/*PARAMETER COUNT*/); 
+    
+    
     DetachIl2Cpp(); // Important when Using ByNameModding Functions
     
     
     DHK(Runner, Level, old_Level); //DobbyHook
-    MSH(Runner, FloatExample, old_FloatExample); //MSHookFunction
-    
-   // PATCH_SWITCH(PlayerSpeed, "C8 02 44 E3 1E FF 2F E1", SWITCH.speedhack);
+    HK(Runner, FloatExample, old_FloatExample); //MSHookFunction
+  
     
     
     return NULL;

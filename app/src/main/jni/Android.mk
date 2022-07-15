@@ -36,7 +36,7 @@ LOCAL_SRC_FILES := Main.cpp \
 	Substrate/SubstratePosixMemory.cpp \
 	Substrate/SymbolFinder.cpp \
 	KittyMemory/KittyMemory.cpp \
-	KittyMemory/MemoryPatch.cpp \
+  KittyMemory/MemoryPatch.cpp \
   KittyMemory/MemoryBackup.cpp \
   KittyMemory/KittyUtils.cpp \
 	And64InlineHook/And64InlineHook.cpp \

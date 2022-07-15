@@ -32,15 +32,12 @@
 #include "Includes/Loader.h"
 #include "Includes/JNIStuff.h"
 #include "Includes/FileWrapper.h"
-#include "Menu/MenuLoader.h"
 #include "Menu/Menu.h"
-#include "Menu/JNIStuff.h"
 #include "Color.h"
 #include "Hacks/Hooks.h"
 
-// namespace used here to clean up the main.cpp
+
 using namespace BNM;
 using namespace Menu;
 using namespace Hooks;
-
 
